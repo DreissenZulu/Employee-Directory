@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import EmployeeList from './components/EmployeeList'
 
 function App() {
-  const [query, setQuery] = useState("blah");
+  const [query, setQuery] = useState("");
 
   function SearchBar(props) {
     return (
@@ -17,10 +17,9 @@ function App() {
   
   function handleSearch (event) {
     event.preventDefault();
-    setQuery(event.target.search.value);
+    setQuery(event.target.search.value.trim());
   }
   
-
   return (
     <div>
       <SearchBar 
