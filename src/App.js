@@ -1,27 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import EmployeeList from './components/EmployeeList'
 
-function SortEmployees() {
-  return (
-    <div className="container">
-      <div className="row d-flex align-items-center" style={{fontSize: "10pt", borderBottom: "2px solid black"}}>
-        <div className="col-md-1"></div>
-        <div className="col-md-1">First Name</div>
-        <div className="col-md-1">Last Name</div>
-        <div className="col-md-2">Date of Birth</div>
-        <div className="col-md-2">City</div>
-        <div className="col-md-2">Phone</div>
-        <div className="col-md-3">Email</div>
-      </div>
-    </div>
-  )
-}
-
 function App() {
+  const [query, setQuery] = useState("blah");
+
+  function SearchBar(props) {
+    return (
+      <nav className="navbar navbar-light bg-info">
+        <form className="form-inline" onSubmit={props.handleSearch}>
+          <input className="form-control mr-sm-2" name="search" type="search" placeholder="Search Directory" aria-label="Search" />
+          <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
+    )
+  }
+  
+  function handleSearch (event) {
+    event.preventDefault();
+    setQuery(event.target.search.value);
+  }
+  
+
   return (
     <div>
-      <SortEmployees />
-      <EmployeeList />
+      <SearchBar 
+        handleSearch={handleSearch}
+      />
+      <EmployeeList query={query} />
     </div>
   );
 }
