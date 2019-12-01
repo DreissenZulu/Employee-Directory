@@ -1,0 +1,5 @@
+.btn-sm, .btn-sm:focus {
+    text-align: left;
+    outline: none;
+    box-shadow: none;
+}
