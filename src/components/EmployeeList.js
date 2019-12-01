@@ -1,23 +1,6 @@
 import React from "react";
 import axios from "axios";
-
-function EmployeeInfo(props) {
-    return (
-        <div className="container">
-            {props.employeeList.map(employee => (
-                <div className="row d-flex align-items-center">
-                    <div className="col-md-1"><img src={employee.picture.medium} alt="Emp Img" /></div>
-                    <div className="col-md-1">{employee.name.first}</div>
-                    <div className="col-md-1">{employee.name.last}</div>
-                    <div className="col-md-2">{employee.dob.date.split("T")[0]}</div>
-                    <div className="col-md-2">{employee.location.city}</div>
-                    <div className="col-md-2">{employee.phone}</div>
-                    <div className="col-md-3">{employee.email}</div>
-                </div>
-            ))}
-        </div>
-    )
-}
+import EmployeeInfo from "./EmployeeInfo";
 
 function TableHeaders() {
     return (
@@ -54,11 +37,11 @@ class EmployeeList extends React.Component {
 
     static getDerivedStateFromProps(nextProps) {
         return {
-         search: nextProps.query,
+            search: nextProps.query,
         };
     }
 
-    filterList() {
+    searchList() {
         let employeeList = this.state.employees;
         if (employeeList.length === 0) {
             return employeeList;
@@ -82,7 +65,7 @@ class EmployeeList extends React.Component {
         return (
             <div>
                 <TableHeaders />
-                <EmployeeInfo employeeList={this.filterList()} />
+                <EmployeeInfo employeeList={this.searchList()} />
             </div>
         )
     }
