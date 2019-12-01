@@ -3,3 +3,8 @@
     outline: none;
     box-shadow: none;
 }
+
+.row {
+    padding: 5px 0 5px 0;
+    border-bottom: 1px dotted black;
+}
