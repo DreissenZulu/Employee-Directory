@@ -1,0 +1,46 @@
+import React from "react";
+import axios from "axios";
+
+function EmployeeInfo(props) {
+    return (
+        <div className="container">
+            {props.employeeList.map(employee => (
+                <div className="row d-flex align-items-center">
+                    <div className="col-lg-1"><img src={employee.picture.medium} alt="Emp Img"/></div>
+                    <div className="col-lg-1">{employee.name.first}</div>
+                    <div className="col-lg-1">{employee.name.last}</div>
+                    <div className="col-lg-1">{employee.dob.date.split("T")[0]}</div>
+                    <div className="col-lg-2">{employee.location.city}</div>
+                    <div className="col-lg-2">{employee.location.state}</div>
+                    <div className="col-lg-3">{employee.email}</div>
+                    <div className="col-lg-1">{employee.phone}</div>
+                </div>
+            ))}
+        </div>
+    )
+}
+
+class EmployeeList extends React.Component {
+    state = {
+        filter: "none",
+        employees: []
+    };
+    
+    async componentDidMount() {
+        try {
+            const employeeList = await axios.get("https://randomuser.me/api/?nat=CA&results=10");
+            this.setState({employees: employeeList.data.results})
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    render() {
+        console.log(this.state.employees)
+        return (
+            <EmployeeInfo employeeList={this.state.employees} />
+        )
+    }
+}
+
+export default EmployeeList;
