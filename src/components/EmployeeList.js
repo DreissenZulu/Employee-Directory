@@ -19,10 +19,27 @@ function EmployeeInfo(props) {
     )
 }
 
+function TableHeaders() {
+    return (
+        <div className="container">
+            <div className="row d-flex align-items-center" style={{ fontSize: "10pt", borderBottom: "2px solid black" }}>
+                <div className="col-md-1"></div>
+                <button className="btn btn-sm col-md-1" name="fName">First Name</button>
+                <button className="btn btn-sm col-md-1" name="lName">Last Name</button>
+                <button className="btn btn-sm col-md-2" name="dob">Date of Birth</button>
+                <button className="btn btn-sm col-md-2" name="city">City</button>
+                <button className="btn btn-sm col-md-2" name="phoneNum">Phone</button>
+                <button className="btn btn-sm col-md-3" name="email">Email</button>
+            </div>
+        </div>
+    )
+}
+
 class EmployeeList extends React.Component {
     state = {
         filter: this.props.filter,
         order: this.props.order,
+        search: this.props.query,
         employees: []
     };
 
@@ -35,42 +52,36 @@ class EmployeeList extends React.Component {
         }
     }
 
-    sortList() {
-        let employeeList = this.state.employees
+    static getDerivedStateFromProps(nextProps) {
+        return {
+         search: nextProps.query,
+        };
+    }
+
+    filterList() {
+        let employeeList = this.state.employees;
         if (employeeList.length === 0) {
             return employeeList;
-        } else {
-            employeeList.sort()
+        } else if (this.state.search !== "") {
+            employeeList = employeeList.filter(employee => {
+                return (
+                    employee.name.first.toLowerCase().includes( this.state.search.toLowerCase() ) ||
+                    employee.name.last.toLowerCase().includes( this.state.search.toLowerCase() ) ||
+                    employee.dob.date.toLowerCase().includes( this.state.search.toLowerCase() ) ||
+                    employee.location.city.toLowerCase().includes( this.state.search.toLowerCase() ) ||
+                    employee.phone.toLowerCase().includes( this.state.search.toLowerCase() ) ||
+                    employee.email.toLowerCase().includes( this.state.search.toLowerCase() )
+                );
+            })
         }
-        console.log(employeeList)
-        switch (this.state.filter) {
-            case "firstDescending":
-
-                break;
-            case "firstAscending":
-
-                break;
-            default:
-                return employeeList
-        }
+        return employeeList;
     }
 
     render() {
-        console.log(this.state.employees)
         return (
             <div>
-                <div className="container">
-                    <div className="row d-flex align-items-center" style={{ fontSize: "10pt", borderBottom: "2px solid black" }}>
-                        <div className="col-md-1"></div>
-                        <button className="btn btn-sm col-md-1">First Name</button>
-                        <button className="btn btn-sm col-md-1">Last Name</button>
-                        <button className="btn btn-sm col-md-2">Date of Birth</button>
-                        <button className="btn btn-sm col-md-2">City</button>
-                        <button className="btn btn-sm col-md-2">Phone</button>
-                        <button className="btn btn-sm col-md-3">Email</button>
-                    </div>
-                </div>
-                <EmployeeInfo employeeList={this.sortList()} />
+                <TableHeaders />
+                <EmployeeInfo employeeList={this.filterList()} />
             </div>
         )
     }
