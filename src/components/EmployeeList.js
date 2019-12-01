@@ -45,7 +45,7 @@ class EmployeeList extends React.Component {
 
     async componentDidMount() {
         try {
-            const employeeList = await axios.get("https://randomuser.me/api/?nat=CA&seed=fodder&results=20");
+            const employeeList = await axios.get("https://randomuser.me/api/?nat=CA&seed=fodder&results=30");
             this.setState({ employees: employeeList.data.results })
         } catch (err) {
             console.log(err)
@@ -62,14 +62,15 @@ class EmployeeList extends React.Component {
         let employeeList = this.state.employees;
         if (employeeList.length === 0) {
             return employeeList;
+        // When the search state is updated the program will filter 
         } else if (this.state.search !== "") {
             employeeList = employeeList.filter(employee => {
                 return (
                     employee.name.first.toLowerCase().includes( this.state.search.toLowerCase() ) ||
                     employee.name.last.toLowerCase().includes( this.state.search.toLowerCase() ) ||
-                    employee.dob.date.toLowerCase().includes( this.state.search.toLowerCase() ) ||
+                    employee.dob.date.includes( this.state.search ) ||
                     employee.location.city.toLowerCase().includes( this.state.search.toLowerCase() ) ||
-                    employee.phone.toLowerCase().includes( this.state.search.toLowerCase() ) ||
+                    employee.phone.includes( this.state.search ) ||
                     employee.email.toLowerCase().includes( this.state.search.toLowerCase() )
                 );
             })
