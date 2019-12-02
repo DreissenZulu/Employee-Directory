@@ -4,7 +4,18 @@
     box-shadow: none;
 }
 
+.navbar {
+    width: 100vw;
+    z-index: 1;
+}
+
 .row {
     padding: 5px 0 5px 0;
     border-bottom: 1px dotted black;
+}
+
+.tableHeader { 
+    font-size: 10pt; 
+    border-bottom: 2px solid black; 
+    padding-top: 56px;
 }
