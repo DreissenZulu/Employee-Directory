@@ -11,8 +11,8 @@ function App() {
   }
 
   function clearSearch (event) {
-    if (event.target.parentElement.search) {
-      event.target.parentElement.search.value = "";
+    if (event.currentTarget.parentElement.search) {
+      event.currentTarget.parentElement.search.value = "";
       setQuery("");
     }
   }
