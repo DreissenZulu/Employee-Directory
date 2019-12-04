@@ -20,7 +20,7 @@ function TableHeaders(props) {
 
 class EmployeeList extends React.Component {
   state = {
-    sortBy: "",
+    sortBy: "lName",
     order: "descending",
     search: this.props.query,
     employees: []
@@ -70,8 +70,8 @@ class EmployeeList extends React.Component {
   render() {
     return (
       <div>
-        <TableHeaders handleBtnClick={this.handleBtnClick} />
-        <EmployeeInfo employeeList={this.searchList()} />
+        <TableHeaders handleBtnClick={this.handleBtnClick} sortBy={this.state.sortBy} order={this.state.order} />
+        <EmployeeInfo employeeList={this.searchList()} sortBy={this.state.sortBy} order={this.state.order} />
       </div>
     )
   }
