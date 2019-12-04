@@ -1,22 +1,7 @@
 import React from "react";
 import axios from "axios";
 import EmployeeInfo from "./EmployeeInfo";
-
-function TableHeaders(props) {
-  return (
-    <div className="container">
-      <div className="row d-flex align-items-center tableHeader">
-        <div className="col-md-1"></div>
-        <button className="btn btn-sm col-md-1" onClick={props.handleBtnClick} name="fName">First Name</button>
-        <button className="btn btn-sm col-md-1" onClick={props.handleBtnClick} name="lName">Last Name</button>
-        <button className="btn btn-sm col-md-2" onClick={props.handleBtnClick} name="dob">Date of Birth</button>
-        <button className="btn btn-sm col-md-2" onClick={props.handleBtnClick} name="city">City</button>
-        <button className="btn btn-sm col-md-2" onClick={props.handleBtnClick} name="phoneNum">Phone</button>
-        <button className="btn btn-sm col-md-3" onClick={props.handleBtnClick} name="email">Email</button>
-      </div>
-    </div>
-  )
-}
+import TableHeaders from "./TableHeaders";
 
 class EmployeeList extends React.Component {
   state = {
@@ -69,9 +54,15 @@ class EmployeeList extends React.Component {
 
   render() {
     return (
-      <div>
-        <TableHeaders handleBtnClick={this.handleBtnClick} sortBy={this.state.sortBy} order={this.state.order} />
-        <EmployeeInfo employeeList={this.searchList()} sortBy={this.state.sortBy} order={this.state.order} />
+      <div className="container" style={{maxWidth:"1280px"}}>
+        <TableHeaders
+          handleBtnClick={this.handleBtnClick}
+          sortBy={this.state.sortBy}
+          order={this.state.order} />
+        <EmployeeInfo
+          employeeList={this.searchList()}
+          sortBy={this.state.sortBy}
+          order={this.state.order} />
       </div>
     )
   }
