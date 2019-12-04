@@ -26,7 +26,7 @@ function EmployeeInfo(props) {
             break;
     }
     return (
-        <div className="container">
+        <div>
             {employeeList.map(employee => (
                 <div className="row d-flex align-items-center">
                     <div className="col-md-1"><img src={employee.picture.medium} alt="Emp Img" /></div>
