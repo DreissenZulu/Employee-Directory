@@ -28,7 +28,7 @@ function EmployeeInfo(props) {
     return (
         <div>
             {employeeList.map(employee => (
-                <div className="row d-flex align-items-center">
+                <div className="row d-flex align-items-center" key={employee.email}>
                     <div className="col-md-1"><img src={employee.picture.medium} alt="Emp Img" /></div>
                     <div className="col-md-1">{employee.name.first}</div>
                     <div className="col-md-1">{employee.name.last}</div>
